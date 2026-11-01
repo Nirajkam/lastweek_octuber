@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#211b18">
+    <meta name="description" content="A private, local-first space to gather memories and create a digital ofrenda.">
+    <title>Marigold — a little place for remembering</title>
+    <link rel="stylesheet" href="/styles.css">
+    <script src="/app.js" defer></script>
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="wordmark" href="/" aria-label="Marigold home">
+        <span class="wordmark-flower" aria-hidden="true">✳</span> marigold
+      </a>
+      <div class="privacy-note"><span class="privacy-dot"></span> Your memories stay on this device</div>
+    </header>
+
+    <main>
+      <section class="intro">
+        <p class="eyebrow">A quiet place to remember</p>
+        <h1>Love leaves<br><em>something behind.</em></h1>
+        <p class="intro-copy">Gather a few things that bring them close. This little ofrenda is yours to keep.</p>
+        <div class="garland" aria-hidden="true"><span>✿</span><i></i><span>✿</span><i></i><span>✿</span></div>
+      </section>
+
+      <section class="workspace" aria-label="Ofrenda builder">
+        <aside class="memory-rail">
+          <div class="rail-heading">
+            <div>
+              <p class="eyebrow">Your altar</p>
+              <h2>Remembrances</h2>
+            </div>
+            <button class="icon-button" id="new-memory" type="button" aria-label="Start a new remembrance" title="Start a new remembrance">+</button>
+          </div>
+          <p class="rail-help">Saved only in this browser.</p>
+          <ul id="memory-list" class="memory-list" aria-label="Saved remembrances"></ul>
+          <div class="rail-actions">
+            <button class="text-button" id="export-library" type="button">Export all memories</button>
+            <label class="text-button import-button">Import a backup<input id="import-library" type="file" accept="application/json,.json"></label>
+          </div>
+        </aside>
+
+        <div class="editor">
+          <div class="editor-heading">
+            <div>
+              <p class="eyebrow">Add to your ofrenda</p>
+              <h2 id="editor-title">Who are you remembering?</h2>
+            </div>
+            <button class="delete-button" id="delete-memory" type="button" hidden>Delete</button>
+          </div>
+          <p id="storage-warning" class="notice error" role="alert" hidden></p>
+
+          <form id="memory-form">
+            <label class="field">
+              <span>Their name <small>or the name you called them</small></span>
+              <input id="memory-name" name="name" maxlength="160" placeholder="Abuela, Sam, my old friend…" autocomplete="off">
+            </label>
+            <label class="field">
+              <span>Things they loved <small>food, music, flowers, little rituals</small></span>
+              <textarea id="memory-favorites" name="favorite_things" rows="3" maxlength="8000" placeholder="The boleros she sang while cooking. Sunflowers. Very sweet coffee."></textarea>
+            </label>
+            <label class="field">
+              <span>A story you carry <small>just a few words is enough</small></span>
+              <textarea id="memory-story" name="story" rows="4" maxlength="8000" placeholder="The time they taught you to…"></textarea>
+            </label>
+            <label class="field">
+              <span>What you want to remember <small>their humor, their patience, their way of seeing things</small></span>
+              <textarea id="memory-qualities" name="qualities" rows="3" maxlength="8000" placeholder="They always made room at the table."></textarea>
+            </label>
+            <div class="form-actions">
+              <button class="button button-primary" id="generate-draft" type="button">
+                <span aria-hidden="true">✳</span> Help me find the words
+              </button>
+              <button class="button button-quiet" id="save-memory" type="submit">Save remembrance</button>
+            </div>
+            <div class="model-row">
+              <select id="model-select" aria-label="Choose a local Ollama model" disabled><option>Checking for local models…</option></select>
+              <button class="text-button" id="refresh-models" type="button">Refresh</button>
+            </div>
+            <p class="model-status" id="model-status" role="status" aria-live="polite">Checking for a local model…</p>
+          </form>
+
+          <section class="draft-section" aria-labelledby="draft-title">
+            <div class="draft-heading">
+              <div>
+                <p class="eyebrow">Your words</p>
+                <h3 id="draft-title">A remembrance</h3>
+              </div>
+              <span class="edit-hint">Always yours to change</span>
+            </div>
+            <textarea id="memory-draft" rows="7" maxlength="8000" placeholder="Your remembrance will live here. You can write it yourself, or ask your local model for a first draft."></textarea>
+            <p class="privacy-footnote">The model runs on your computer. It can still imagine details—check every sentence before keeping or sharing a draft.</p>
+          </section>
+          <p id="app-status" class="app-status" role="status" aria-live="polite"></p>
+        </div>
+      </section>
+    </main>
+    <footer>
+      <span>Made for remembering, not for forgetting.</span>
+      <span>✿</span>
+    </footer>
+  </body>
+</html>
